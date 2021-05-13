@@ -1,0 +1,7 @@
+*.tgz
+*.ts
+!*.d.ts
+tsconfig.json
+jest.config.js
+.editorconfig
+.husky
