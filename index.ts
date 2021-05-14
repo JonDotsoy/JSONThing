@@ -175,4 +175,4 @@ export class JSONThink<K extends string = "$$type"> {
   }
 }
 
-export const jsonThink = new JSONThink();
+export const jsonthink = new JSONThink();

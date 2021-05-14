@@ -1,4 +1,4 @@
-import { JSONThink, jsonThink } from ".";
+import { JSONThink, jsonthink } from ".";
 import { descriptor } from "./descriptor";
 import { TypeObject } from "./TypeObject";
 
@@ -12,7 +12,7 @@ describe("JSONthink", () => {
       }
     }
 
-    expect(jsonThink.stringify({ a: new A() })).toEqual('{"a":"a"}');
+    expect(jsonthink.stringify({ a: new A() })).toEqual('{"a":"a"}');
   });
 
   it("Transform by Class", () => {
@@ -79,21 +79,21 @@ describe("JSONthink", () => {
   });
 
   it("Transform BigInt", () => {
-    const stringify = jsonThink.stringify(123n);
+    const stringify = jsonthink.stringify(123n);
     expect(stringify).toEqual(`{"$$type":"BigInt","value":"123"}`);
   });
 
   it("Transform Date", () => {
-    expect(jsonThink.stringify(new Date(2021, 5, 1))).toEqual(
+    expect(jsonthink.stringify(new Date(2021, 5, 1))).toEqual(
       `{"$$type":"Date","date":"2021-06-01T04:00:00.000Z"}`
     );
-    expect(jsonThink.stringify({ d: new Date(2021, 5, 1) })).toEqual(
+    expect(jsonthink.stringify({ d: new Date(2021, 5, 1) })).toEqual(
       `{"d":{"$$type":"Date","date":"2021-06-01T04:00:00.000Z"}}`
     );
   });
 
   it("Transform Buffer", () => {
-    const stringify = jsonThink.stringify(Buffer.from("hola"));
+    const stringify = jsonthink.stringify(Buffer.from("hola"));
     expect(stringify).toEqual(`{"$$type":"Buffer","data":[104,111,108,97]}`);
   });
 
@@ -117,7 +117,7 @@ describe("JSONthink", () => {
     `;
 
     const result: { id: string; date: Date; size: bigint; hashPass: Buffer } =
-      jsonThink.parse(jsonData);
+      jsonthink.parse(jsonData);
 
     expect(result.id).toEqual("586fedcc-a547-418d-8dff-93b54053655f");
     expect(result.date).toBeInstanceOf(Date);

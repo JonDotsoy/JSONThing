@@ -26,15 +26,15 @@ Look at this json file.
 }
 ```
 
-Now, we to be using `jsonThink.parse` to parse the file.
+Now, we to be using `jsonthink.parse` to parse the file.
 
 ```ts
-// $ node -r jsonThink/register
+// $ node -r jsonthink/register
 
 // This is only to read the input data
 const jsonData = fs.readFileSync(jsonfile, "utf8");
 
-jsonThink.parse(jsonData);
+jsonthink.parse(jsonData);
 // Output:
 // {
 //   id: '586fedcc-a547-418d-8dff-93b54053655f',
@@ -43,3 +43,9 @@ jsonThink.parse(jsonData);
 //   hashPass: <Buffer 31 32 33 34>
 // }
 ```
+
+### Native Transforms
+
+- Buffer
+- BigInt
+- Date
