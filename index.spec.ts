@@ -96,4 +96,33 @@ describe("JSONthink", () => {
     const stringify = jsonThink.stringify(Buffer.from("hola"));
     expect(stringify).toEqual(`{"$$type":"Buffer","data":[104,111,108,97]}`);
   });
+
+  it("demo parse", () => {
+    const jsonData = `
+      {
+        "id": "586fedcc-a547-418d-8dff-93b54053655f",
+        "date": {
+          "$$type": "Date",
+          "date": "2021-05-14T16:41:28.090Z"
+        },
+        "size": {
+          "$$type": "BigInt",
+          "value": "912384592101238283288242"
+        },
+        "hashPass": {
+          "$$type": "Buffer",
+          "data": [ 49, 50, 51, 52 ]
+        }
+      }
+    `;
+
+    const result: { id: string; date: Date; size: bigint; hashPass: Buffer } =
+      jsonThink.parse(jsonData);
+
+    expect(result.id).toEqual("586fedcc-a547-418d-8dff-93b54053655f");
+    expect(result.date).toBeInstanceOf(Date);
+    expect(result.date.getTime()).toEqual(1621010488090);
+    expect(typeof result.size === "bigint").toBeTruthy();
+    expect(result.hashPass).toBeInstanceOf(Buffer);
+  });
 });

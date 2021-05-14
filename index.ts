@@ -50,20 +50,10 @@ export const isTransformDescription = (value: any): value is obj<descriptor> =>
       withFromJSONThink(value)
     : false;
 
-const globalDescriptores = new Map<string, descriptor>();
-
-globalDescriptores.set("Date", DateDescriptor);
-globalDescriptores.set("BigInt", BigIntDescriptor);
-globalDescriptores.set("Buffer", BufferDescriptor);
-
-export class JSONThink<K extends string = "$$type"> {
-  constructor(private options?: { propTypeName?: K }) {}
-
-  readonly propTypeName = this.options?.propTypeName ?? "$$type";
-
-  private listThinks = new Map<any, string>();
-  private listThinksByName = new Map<string, any>();
-  private listThinksDescriptions = globalDescriptores;
+class StoreTypes {
+  readonly listThinks = new Map<any, string>();
+  readonly listThinksByName = new Map<string, any>();
+  readonly listThinksDescriptions = new Map<string, descriptor>();
 
   use(ref: any, name?: string) {
     const nameValue = name ?? ref.name;
@@ -73,6 +63,26 @@ export class JSONThink<K extends string = "$$type"> {
     } else {
       this.listThinks.set(ref, nameValue);
     }
+    return this;
+  }
+}
+
+const globalStoreTypes = new StoreTypes();
+
+globalStoreTypes.use(DateDescriptor, "Date");
+globalStoreTypes.use(BigIntDescriptor, "BigInt");
+globalStoreTypes.use(BufferDescriptor, "Buffer");
+
+export class JSONThink<K extends string = "$$type"> {
+  constructor(
+    private options?: { propTypeName?: K },
+    readonly storeTypes = globalStoreTypes
+  ) {}
+
+  readonly propTypeName = this.options?.propTypeName ?? "$$type";
+
+  use(ref: any, name?: string) {
+    this.storeTypes.use(ref, name);
     return this;
   }
 
@@ -122,12 +132,14 @@ export class JSONThink<K extends string = "$$type"> {
         const res = value.toJSONThink();
         return {
           ...res,
-          [this.propTypeName]: this.listThinks.get(value.constructor),
+          [this.propTypeName]: this.storeTypes.listThinks.get(
+            value.constructor
+          ),
         };
       }
 
-      if (this.listThinksDescriptions.size) {
-        const iterator = this.listThinksDescriptions.entries();
+      if (this.storeTypes.listThinksDescriptions.size) {
+        const iterator = this.storeTypes.listThinksDescriptions.entries();
 
         while (true) {
           const { value: valueIterator, done } = iterator.next();
@@ -150,7 +162,7 @@ export class JSONThink<K extends string = "$$type"> {
     const reviverP = (key: string, value: any) => {
       if (isObjectKeyType(value, this.propTypeName)) {
         const typeKey = value[this.propTypeName];
-        const typeCls = this.listThinksByName.get(typeKey);
+        const typeCls = this.storeTypes.listThinksByName.get(typeKey);
         if (withFromJSONThink(typeCls)) {
           return typeCls.fromJSONThink(value);
         }
