@@ -5,7 +5,7 @@
   "main": "index.js",
   "publishConfig": {
     "access": "public",
-    "tag": "beta"
+    "tag": "latest"
   },
   "scripts": {
     "prepare": "tsc && husky install",
