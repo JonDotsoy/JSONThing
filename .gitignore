@@ -6,6 +6,7 @@
 *.js
 *.d.ts
 !commitlint.config.js
+!.github/
 
 # Created by https://www.toptal.com/developers/gitignore/api/node
 # Edit at https://www.toptal.com/developers/gitignore?templates=node

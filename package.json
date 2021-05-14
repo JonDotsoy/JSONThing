@@ -1,9 +1,13 @@
 {
   "name": "jsonthink",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "JSON dynamic parser",
   "main": "index.js",
+  "publishConfig": {
+    "access": "public",
+    "tag": "beta"
+  },
   "scripts": {
     "prepare": "tsc && husky install",
     "test": "jest",
@@ -11,15 +15,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JonDotsoy/jsontick.git"
+    "url": "git+https://github.com/JonDotsoy/jsonthink.git"
   },
   "keywords": [],
   "author": "Jonathan Delgado <https://jon.soy> (hi@jon.soy)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JonDotsoy/jsontick/issues"
+    "url": "https://github.com/JonDotsoy/jsonthink/issues"
   },
-  "homepage": "https://github.com/JonDotsoy/jsontick#readme",
+  "homepage": "https://github.com/JonDotsoy/jsonthink#readme",
   "devDependencies": {
     "@commitlint/cli": "^12.1.3",
     "@commitlint/config-conventional": "^12.1.3",
