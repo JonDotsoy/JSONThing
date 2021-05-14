@@ -1,4 +1,4 @@
-name: NPM Publish package jsonthink
+name: NPM Publish package JsonThink
 
 on:
   push:
