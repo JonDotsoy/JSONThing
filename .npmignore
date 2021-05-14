@@ -6,3 +6,4 @@ jest.config.js
 .editorconfig
 .husky
 commitlint.config.js
+.github
