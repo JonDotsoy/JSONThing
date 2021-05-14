@@ -1,7 +1,5 @@
-# JSONThing
+# JSONThink
 
 **Proposal**
 
-Use a generic json to export and import object with multiples types. 
-
-
+Use a generic json to export and import object with multiples types.
