@@ -1,6 +1,6 @@
 {
   "name": "jsonthink",
-  "version": "0.1.0",
+  "version": "0.1.1-beta.0",
   "private": true,
   "description": "JSON dynamic parser",
   "main": "index.js",
