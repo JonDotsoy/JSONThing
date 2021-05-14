@@ -7,3 +7,4 @@ jest.config.js
 .husky
 commitlint.config.js
 .github
+.secrets
