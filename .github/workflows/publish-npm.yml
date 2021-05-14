@@ -3,7 +3,7 @@ name: NPM Publish package jsonthink
 on:
   push:
     tags:
-      - "jsonthink@*"
+      - "v*"
 
 jobs:
   publish:
