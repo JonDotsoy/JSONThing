@@ -1,4 +1,6 @@
-import { JSONThink, TypeObject, descriptor, jsonThink } from ".";
+import { JSONThink, jsonThink } from ".";
+import { descriptor } from "./descriptor";
+import { TypeObject } from "./TypeObject";
 
 describe("JSONthink", () => {
   it("sample", () => {
