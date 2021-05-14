@@ -11,11 +11,11 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: autorize on npm
+      - name: Authorize on npm
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-      - name: install
+      - name: Install dependencies
         run: npm ci
       - name: publish on npm
         run: npm publish
