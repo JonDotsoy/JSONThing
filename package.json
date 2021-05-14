@@ -16,7 +16,12 @@
     "type": "git",
     "url": "git+https://github.com/JonDotsoy/jsonthink.git"
   },
-  "keywords": [],
+  "keywords": [
+    "json",
+    "json-serialize",
+    "json-stringify",
+    "json-parse"
+  ],
   "author": "Jonathan Delgado <https://jon.soy> (hi@jon.soy)",
   "license": "ISC",
   "bugs": {
