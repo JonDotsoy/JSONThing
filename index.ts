@@ -50,10 +50,12 @@ export const isTransformDescription = (value: any): value is obj<descriptor> =>
       withFromJSONThink(value)
     : false;
 
-class StoreTypes {
-  readonly listThinks = new Map<any, string>();
-  readonly listThinksByName = new Map<string, any>();
-  readonly listThinksDescriptions = new Map<string, descriptor>();
+export class StoreTypes {
+  constructor(
+    readonly listThinks = new Map<any, string>(),
+    readonly listThinksByName = new Map<string, any>(),
+    readonly listThinksDescriptions = new Map<string, descriptor>()
+  ) {}
 
   use(ref: any, name?: string) {
     const nameValue = name ?? ref.name;
@@ -65,9 +67,17 @@ class StoreTypes {
     }
     return this;
   }
+
+  clone() {
+    return new StoreTypes(
+      new Map([...this.listThinks]),
+      new Map([...this.listThinksByName]),
+      new Map([...this.listThinksDescriptions])
+    );
+  }
 }
 
-const globalStoreTypes = new StoreTypes();
+export const globalStoreTypes = new StoreTypes();
 
 globalStoreTypes.use(DateDescriptor, "Date");
 globalStoreTypes.use(BigIntDescriptor, "BigInt");
@@ -76,7 +86,7 @@ globalStoreTypes.use(BufferDescriptor, "Buffer");
 export class JSONThink<K extends string = "$$type"> {
   constructor(
     private options?: { propTypeName?: K },
-    readonly storeTypes = globalStoreTypes
+    readonly storeTypes = globalStoreTypes.clone()
   ) {}
 
   readonly propTypeName = this.options?.propTypeName ?? "$$type";

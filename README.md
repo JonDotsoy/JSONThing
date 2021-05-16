@@ -4,7 +4,7 @@
 
 Use a generic json to export and import object with multiples types.
 
-**Sample**
+**Sample json Format**
 
 Look at this json file.
 
@@ -49,3 +49,40 @@ jsonthink.parse(jsonData);
 - Buffer
 - BigInt
 - Date
+
+### Custom Transformer
+
+On jsonthink, you can use the `.use(Entity)` method.
+
+```ts
+class MyEntity {
+  constructor(private name: string) {}
+  toJSONThink() {
+    return {
+      $$type: "MyEntity",
+      name: this.name,
+    };
+  }
+  fromJSONThink(value: any) {
+    return new MyEntity(value.name);
+  }
+}
+
+jsonthink.use(MyEntity);
+
+const data = { myEntityInstance: new MyEntity("Rocky") };
+
+const output = jsonthink.stringify(data);
+// output:
+// {
+//   "myEntityInstance": {
+//     "$$type": "MyEntity",
+//     "name": "Rocky"
+//   }
+// }
+
+jsonthink.parse(output);
+// {
+//   myEntityInstance: MyEntity { name: 'Rocky' }
+// }
+```
